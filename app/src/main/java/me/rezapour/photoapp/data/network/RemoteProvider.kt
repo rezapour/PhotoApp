@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class RemoteProvider {
 
     companion object {
-        private fun initRetrofit(): RemoteApi = Retrofit.Builder()
+        fun initRetrofit(): RemoteApi = Retrofit.Builder()
             .baseUrl(Constans.BASE_URL)
             .addConverterFactory(initMoshi())
             .client(initOkHttpClint())
