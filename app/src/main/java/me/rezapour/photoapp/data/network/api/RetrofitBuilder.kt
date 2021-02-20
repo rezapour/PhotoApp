@@ -35,6 +35,7 @@ object RetrofitBuilder {
         it.level = HttpLoggingInterceptor.Level.BASIC
     }
 
+    //todo replace with Generic
     fun getApiServiceInstace(): ApiService {
         return initRetrofit().create(ApiService::class.java)
     }
