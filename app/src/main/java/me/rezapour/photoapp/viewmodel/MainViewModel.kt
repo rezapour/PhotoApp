@@ -1,6 +1,12 @@
 package me.rezapour.photoapp.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import me.rezapour.photoapp.asset.Constans
+import me.rezapour.photoapp.data.network.models.PhotosData
 import me.rezapour.photoapp.data.network.repository.MainRepository
 
 class MainViewModel(
@@ -8,26 +14,35 @@ class MainViewModel(
 ) :
     ViewModel() {
 
+    val photosData: MutableLiveData<List<PhotosData>> by lazy {
+        MutableLiveData<List<PhotosData>>()
+    }
 
-//
-//    fun getData() {
-//
-//        CoroutineScope(IO).launch {
-//
-//            try {
-//                Log.d("PhotoAppTest", "start")
-//                val respond = RetrofitBuilder.getPhotos()
-//                Log.d("PhotoAppTest", "${respond.code()}")
-//                if (respond.isSuccessful && respond.code() == 200)
-//                    Log.d("PhotoAppTest", "Success")
-//                else
-//                    Log.d("PhotoAppTest", "Error")
-//            } catch (e: Exception) {
-//                Log.d("PhotoAppTest", "error form me: ${e.message}")
-//            }
-//
-//
-//        }
-//
-//    }
+    init {
+        getData()
+    }
+
+    private fun getData() {
+
+        viewModelScope.launch {
+            try {
+                val respond = repository.getPhotos(Constans.token)
+                Log.d("PhotoAppTest", "${respond.code()}")
+                if (respond.isSuccessful && respond.code() == 200)
+                    photosData.postValue(respond.body())
+                else
+                    Log.d("PhotoAppTest", "Error")
+            } catch (e: Exception) {
+                Log.d("PhotoAppTest", "error form me: ${e.message}")
+            }
+
+
+        }
+
+    }
+
+    fun getPhotots(): MutableLiveData<List<PhotosData>> {
+        return photosData
+    }
+
 }
