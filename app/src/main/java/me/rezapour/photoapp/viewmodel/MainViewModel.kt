@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import me.rezapour.photoapp.asset.Constans
+import me.rezapour.photoapp.BuildConfig
+
 import me.rezapour.photoapp.data.network.models.PhotosData
 import me.rezapour.photoapp.data.network.repository.MainRepository
 
@@ -26,7 +27,7 @@ class MainViewModel(
 
         viewModelScope.launch {
             try {
-                val respond = repository.getPhotos(Constans.token)
+                val respond = repository.getPhotos(BuildConfig.UNSPLASH_TOKEN)
                 Log.d("PhotoAppTest", "${respond.code()}")
                 if (respond.isSuccessful && respond.code() == 200)
                     photosData.postValue(respond.body())
@@ -44,5 +45,16 @@ class MainViewModel(
     fun getPhotots(): MutableLiveData<List<PhotosData>> {
         return photosData
     }
+
+
+//    viewModel = ViewModelProvider(
+//    this, MainViewModelFactory(
+//    MainRepository(
+//    ApiHelperImpl(
+//    RetrofitBuilder.getApiServiceInstace()
+//    )
+//    )
+//    )
+//    ).get(MainViewModel::class.java)
 
 }
