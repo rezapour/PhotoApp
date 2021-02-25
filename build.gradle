@@ -7,6 +7,7 @@ buildscript {
         retrofit_version = "2.9.0"
         moshi_version = "1.11.0"
         nav_version = "2.3.3"
+        viewpager_version="1.0.0"
     }
 
 
