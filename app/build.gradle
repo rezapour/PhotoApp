@@ -16,8 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField("String", "UNSPLASH_TOKEN", apikeyProperties['UNSPLASH_TOKEN'])
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -64,6 +64,11 @@ dependencies {
     //Nav
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation "androidx.viewpager2:viewpager2:$viewpager_version"
+    implementation 'com.google.android.material:material:1.3.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
 
 
 }
