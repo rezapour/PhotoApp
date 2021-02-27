@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.activites.fragments.PhotosListFragment">
 
-    <TextView
+    <!--    todo -> check about constraint layout  -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_photos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="11111111111" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

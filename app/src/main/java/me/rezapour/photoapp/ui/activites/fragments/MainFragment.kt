@@ -28,7 +28,6 @@ class MainFragment : Fragment() {
 
         val fragmentList = arrayListOf<Fragment>(
             PhotosListFragment(),
-            PhotosListFragment(),
             PhotoPreviewFragment()
         )
 
@@ -39,8 +38,11 @@ class MainFragment : Fragment() {
         )
         view.viewpager_main.adapter = viewPagerAdapter
         TabLayoutMediator(TabLayout_List, view.viewpager_main) { tab, position ->
-            tab.text = "1"
-            viewpager_main.setCurrentItem(tab.position, true)
+            when (position) {
+                0 -> tab.text = "Recently"
+                1 -> tab.text = "Popular"
+                2 -> tab.text = "Last seen"
+            }
         }.attach()
     }
 
